@@ -337,8 +337,11 @@
         scoreDom = document.getElementById('score'),
         bestscoreDom = document.getElementById('bestscore'),
         bestScore = parseInt(getCookie('best_score') || 0),
-        historyBoard = getCookie('history_board');
+        historyScore = parseInt(getCookie('history_score') || 0),
+        historyBoard = getCookie('history_board'),
         numberFontSize = 2;
+
+    scoreDom.innerText = historyScore;
     bestscoreDom.innerText = bestScore;
 
     function getHistoryBoard() {
@@ -362,11 +365,13 @@
     function setHistoryBoard(arr) {
         historyBoard = JSON.stringify(arr);
         setCookie('history_board', historyBoard);
+        setCookie('history_score', scoreDom.innerText);
     }
 
     function destroyHistoryBoard() {
         historyBoard = null;
-        setCookie('history_board', '');
+        setCookie('history_board', '', -1);
+        setCookie('history_score', '', -1);
     }
 
     function restart() {
